@@ -1,12 +1,16 @@
 import json
+import os
 from datetime import datetime, time, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
+from dotenv import load_dotenv
 from telegram import Update, ReplyKeyboardMarkup
 from telegram.ext import Application, ContextTypes, CommandHandler, MessageHandler, filters
 
-BOT_TOKEN = "8638651292:AAFQKaRHgDunijziT7_EXxmrwQXfrCJk1yM"
-CHAT_ID = "1120695231"
+load_dotenv()
+
+BOT_TOKEN = os.environ["BOT_TOKEN"]
+CHAT_ID = os.environ["CHAT_ID"]
 TIMEZONE = ZoneInfo("Europe/Kyiv")
 IDS_FILE = Path("message_ids.json")
 CONFIG_FILE = Path("config.json")
