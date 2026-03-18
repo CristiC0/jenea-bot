@@ -72,6 +72,9 @@ def _keyboard(*rows: str) -> ReplyKeyboardMarkup:
 async def send_reminder(context: ContextTypes.DEFAULT_TYPE) -> None:
     await context.bot.send_message(chat_id=CHAT_ID, text=context.job.data)
 
+async def good_morning(context: ContextTypes.DEFAULT_TYPE) -> None:
+    await context.bot.send_message(chat_id=CHAT_ID, text="Buna dimineata! 🌅")
+
 async def start(update: Update, _context: ContextTypes.DEFAULT_TYPE) -> None:
     ids = load_ids()
     ids.append(update.message.message_id)
@@ -269,6 +272,7 @@ def main() -> None:
     app.add_handler(MessageHandler(filters.Text(["Timp ramas"]), timp_ramas))
 
     app.job_queue.run_daily(clear_and_restart, time=time(6, 0, tzinfo=TIMEZONE))
+    app.job_queue.run_daily(good_morning, time=time(6, 30, tzinfo=TIMEZONE))
     app.job_queue.run_daily(germiflora_reminder, time=get_germiflora_time(), name="germiflora_reminder")
     app.job_queue.run_daily(germiflora_pranz_reminder, time=get_germiflora_pranz_time(), name="germiflora_pranz_reminder")
 
