@@ -160,8 +160,6 @@ async def germiflora_pranz_reminder(context: ContextTypes.DEFAULT_TYPE) -> None:
     context.job_queue.run_once(ranezol_cina_reminder, when=7200)
 
 async def am_mancat_pranzul(update: Update, _context: ContextTypes.DEFAULT_TYPE) -> None:
-    if not ranezol_cina_sent:
-        return
     global current_phase
     current_phase = "AFTER_PRANZ"
     ids = load_ids()
